@@ -8,14 +8,16 @@ const app = express();
 app.use(express.json());
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/logee')
+  .connect(
+    'mongodb://lutfirazan:123@logee-shard-00-00.iowvi.mongodb.net:27017,logee-shard-00-01.iowvi.mongodb.net:27017,logee-shard-00-02.iowvi.mongodb.net:27017/?replicaSet=atlas-x7eqsc-shard-0&ssl=true&authSource=admin'
+  )
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log('Failed to connect to MongoDB', err));
 
 const catalogSchema = new mongoose.Schema({
   origin: { type: String, required: true },
   destination: { type: String, required: true },
-  vehicleType: { type: String, required: truex },
+  vehicleType: { type: String, required: true },
   isFrozen: { type: Boolean, required: true },
   weightCapacity: { type: Number, required: true },
   estimatedTime: { type: String, required: true },
