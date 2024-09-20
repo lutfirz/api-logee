@@ -52,6 +52,7 @@ app.post('/catalog', async (req, res) => {
 
 app.get('/catalogs', async (req, res) => {
   const catalogs = await Catalog.find();
+  console.log(catalogs);
   res.json(catalogs);
 });
 
