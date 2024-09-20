@@ -51,9 +51,15 @@ app.post('/catalog', async (req, res) => {
 });
 
 app.get('/catalogs', async (req, res) => {
-  const catalogs = await Catalog.find();
-  console.log(catalogs);
-  res.json(catalogs);
+  try {
+    const catalogs = await Catalog.find();
+    res.json(catalogs);
+  } catch (err) {
+    res.status(500).json({
+      message: 'Error getting catalog',
+      error: err.message,
+    });
+  }
 });
 
 app.get('/catalogs/:id', async (req, res) => {
