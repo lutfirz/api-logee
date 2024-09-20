@@ -13,6 +13,22 @@ mongoose
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log('Failed to connect to MongoDB', err));
 
+const reviewSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  review: { type: String, required: true },
+});
+
+const driverSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  role: { type: String, required: true },
+  delivery: { type: Number, required: true },
+});
+
+const priceShcema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+});
+
 const catalogSchema = new mongoose.Schema({
   origin: { type: String, required: true },
   destination: { type: String, required: true },
@@ -22,12 +38,12 @@ const catalogSchema = new mongoose.Schema({
   estimatedTime: { type: String, required: true },
   isFragile: { type: Boolean, required: true },
   vendor: { type: String, required: true },
-  rating: [Number],
+  rating: { type: String, required: true },
   specs: [String],
   desc: { type: String, required: true },
-  review: [String],
-  driver: [String],
-  price: { type: Number, required: true },
+  reviews: [reviewSchema],
+  drivers: [driverSchema],
+  prices: [priceShcema],
 });
 
 const Catalog = mongoose.model('Catalog', catalogSchema);
